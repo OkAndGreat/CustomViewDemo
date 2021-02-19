@@ -1,26 +1,29 @@
-package com.example.customeview.SlideMenu;
+package com.example.customeview.slidemenu;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Scroller;
+
 
 /**
  * @author OkAndGreat
  */
 public class SlideMenu extends ViewGroup {
-
+    private static final String TAG = "SlideMenu";
     private int mSlideViewWidth;
     private View mSlideView;
     private View mContentView;
-    private Context mContext;
     Scroller mScroller;
-    private int mScrollXStart;
-    private int mScrollXMove;
-    private int mScrollXEnd;
+    private int mWidth;
+    private Context mContext;
     private int mLastX;
+    private int mStart;
+    private int mEnd;
 
     public SlideMenu(Context context) {
         this(context, null);
@@ -34,6 +37,14 @@ public class SlideMenu extends ViewGroup {
         super(context, attrs, defStyleAttr);
         mContext = context;
         mScroller = new Scroller(getContext());
+        getScreenWidth(context);
+    }
+
+    private void getScreenWidth(Context context) {
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(dm);
+        mWidth = dm.heightPixels;
     }
 
     @Override
@@ -49,40 +60,59 @@ public class SlideMenu extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        mContentView.layout(0, 0, mContentView.getMeasuredWidth(), mContentView.getMeasuredHeight());
-        mSlideView.layout(mContentView.getMeasuredWidth(), 0, mSlideView.getMeasuredWidth(), mSlideView.getMeasuredHeight());
+        mContentView.layout(l, t, r, b);
+        mSlideView.layout(r, t, r + mSlideView.getMeasuredWidth(), b);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        int x = (int) event.getX();
         int action = event.getAction();
+        int x = (int) event.getX();
         if (action == MotionEvent.ACTION_DOWN) {
             mLastX = x;
-            mScrollXStart = getScrollX();
+            mStart = getScrollX();
         } else if (action == MotionEvent.ACTION_MOVE) {
             if (!mScroller.isFinished()) {
                 mScroller.abortAnimation();
             }
             int dx = mLastX - x;
-            if (getScrollX()>=0){
-                scrollBy(dx,0);
+            //防止向右滑动出现空白页面
+            if (dx < -getScrollX()) {
+                dx = 0;
+            }
+            if (getScrollX() >= 0 && getScrollX() <= mSlideViewWidth) {
+                //移动的如果是正数,屏幕向右移动
+                //RestWidth是为了防止向右滑动出现空白页面
+                int RestWidth = mSlideViewWidth - getScrollX();
+                if (dx > RestWidth) {
+                    dx = RestWidth;
+                    scrollBy(dx, 0);
+                }
+
             }
             mLastX = x;
         } else if (action == MotionEvent.ACTION_UP) {
-            mScrollXEnd = getScrollX();
-            int dX = mScrollXEnd - mScrollXStart;
-            if (dX > mSlideViewWidth / 3) {
-                mScroller.startScroll(mScrollXEnd, 0, mSlideViewWidth - (mScrollXEnd - mScrollXStart), 0);
+            mEnd = getScrollX();
+            int dScrollX = mEnd - mStart;
+            if (getScrollX() < 0) {
+                mScroller.startScroll(getScrollX(), 0, -mEnd, 0);
             } else {
-                mScroller.startScroll(mScrollXEnd, 0, -mScrollXEnd, 0);
-            }
-            if (-dX > mSlideViewWidth / 3) {
-                mScroller.startScroll(mScrollXEnd, 0, mSlideViewWidth - (mScrollXStart - mScrollXEnd), 0);
-            } else {
-                mScroller.startScroll(mScrollXEnd, 0, -mScrollXEnd, 0);
+                if (dScrollX > 0) {
+                    if (dScrollX < mSlideViewWidth / 3) {
+                        mScroller.startScroll(getScrollX(), 0, -mEnd, 0);
+                    } else {
+                        mScroller.startScroll(getScrollX(), 0, mSlideViewWidth - mEnd, 0);
+                    }
+                } else {
+                    if (-dScrollX < mSlideViewWidth / 3) {
+                        mScroller.startScroll(getScrollX(), 0, -dScrollX, 0);
+                    } else {
+                        mScroller.startScroll(getScrollX(), 0, -(mSlideViewWidth + dScrollX), 0);
+                    }
+                }
             }
         }
+        postInvalidate();
         return true;
     }
 

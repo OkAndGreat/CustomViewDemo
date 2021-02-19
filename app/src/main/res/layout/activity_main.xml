@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     tools:context=".MainActivity">
 
-    <com.example.customeview.SlideMenu.SlideMenu
+    <com.example.customeview.slidemenu.SlideMenu
         android:layout_width="match_parent"
         android:layout_height="100dp">
 
@@ -17,15 +17,16 @@
             android:gravity="center"
             android:text="MainContent"
             android:textSize="50sp" />
-
         <TextView
-            android:layout_width="50dp"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:background="@color/design_default_color_primary"
             android:gravity="center"
             android:text="Delete"
             android:textSize="30sp" />
 
-    </com.example.customeview.SlideMenu.SlideMenu>
+    </com.example.customeview.slidemenu.SlideMenu>
+
+
 
 </LinearLayout>
