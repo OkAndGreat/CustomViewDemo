@@ -38,6 +38,8 @@ import java.util.concurrent.atomic.AtomicReference;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btn1;
     private Button btn2;
+    private View btn3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,11 +54,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initListener() {
        btn1.setOnClickListener(this);
        btn2.setOnClickListener(this);
+       btn3.setOnClickListener(this);
     }
 
     private void initView() {
         btn1 = (Button) findViewById(R.id.btn_1);
         btn2 = (Button) findViewById(R.id.btn_2);
+        btn3 = findViewById(R.id.btn_3);
 
     }
 
@@ -68,6 +72,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intent=new Intent(this,SlideMenuActivity.class);
         }else if(id==R.id.btn_2){
             intent=new Intent(this,SpiderActivity.class);
+        }
+        else if (id==R.id.btn_3){
+            intent=new Intent(this,BesaierActivity.class);
         }
         startActivity(intent);
     }
