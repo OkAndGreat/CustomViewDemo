@@ -1,8 +1,9 @@
-package com.example.customeview.slidemenu;
+package com.example.customeview.custome;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,10 +85,11 @@ public class SlideMenu extends ViewGroup {
                 //移动的如果是正数,屏幕向右移动
                 //RestWidth是为了防止向右滑动出现空白页面
                 int RestWidth = mSlideViewWidth - getScrollX();
+                Log.d(TAG, "onTouchEvent: dx-->"+dx);
                 if (dx > RestWidth) {
                     dx = RestWidth;
-                    scrollBy(dx, 0);
                 }
+                scrollBy(dx, 0);
 
             }
             mLastX = x;

@@ -2,9 +2,14 @@ package com.example.customeview;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 
 /**
@@ -30,8 +35,9 @@ import android.view.WindowManager;
          佛祖保佑       永无BUG
 */
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private Button btn1;
+    private Button btn2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,5 +45,30 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams. FLAG_FULLSCREEN ,
                 WindowManager.LayoutParams. FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+        initView();
+        initListener();
+    }
+
+    private void initListener() {
+       btn1.setOnClickListener(this);
+       btn2.setOnClickListener(this);
+    }
+
+    private void initView() {
+        btn1 = (Button) findViewById(R.id.btn_1);
+        btn2 = (Button) findViewById(R.id.btn_2);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        Intent intent = null;
+        if (id==R.id.btn_1){
+            intent=new Intent(this,SlideMenuActivity.class);
+        }else if(id==R.id.btn_2){
+            intent=new Intent(this,SpiderActivity.class);
+        }
+        startActivity(intent);
     }
 }

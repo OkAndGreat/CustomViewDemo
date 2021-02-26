@@ -1,4 +1,4 @@
-package com.example.customeview.FlowView;
+package com.example.customeview.custome;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -104,7 +104,8 @@ public class FlowLayout extends ViewGroup {
                 mLineHeight.add(lineHeight);
                 // 将当前行的childView保存，然后开启新的ArrayList保存下一行的childView
                 mAllViews.add(lineViews);
-                lineWidth = 0;// 重置行宽
+                lineWidth = 0;
+                // 重置行宽
                 lineViews = new ArrayList<View>();
             } else {
                 lineWidth += childWidth + lp.leftMargin + lp.rightMargin;

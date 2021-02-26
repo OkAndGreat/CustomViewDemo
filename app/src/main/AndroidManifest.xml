@@ -9,11 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CustomeView">
-        <activity android:name=".NumberInputView"></activity>
-        <activity
-            android:name=".ui.login.NumberInputView"
-            android:label="@string/title_activity_number_input_view" />
-        <activity android:name=".Login.LoginKeyBoard" />
+        <activity android:name=".SlideMenuActivity"></activity>
+        <activity android:name=".SpiderActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.example.customeview.custome.SlideMenu
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/design_default_color_error"
+            android:gravity="center"
+            android:text="MainContent"
+            android:textSize="50sp" />
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:background="@color/design_default_color_primary"
+            android:gravity="center"
+            android:text="Delete"
+            android:textSize="30sp" />
+
+    </com.example.customeview.custome.SlideMenu>
+</LinearLayout>

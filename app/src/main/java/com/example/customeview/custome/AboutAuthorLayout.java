@@ -1,4 +1,4 @@
-package com.example.customeview.AboutAuthorLayout;
+package com.example.customeview.custome;
 
 import android.content.Context;
 import android.util.AttributeSet;
