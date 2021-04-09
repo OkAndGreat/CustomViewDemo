@@ -6,9 +6,12 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Scroller;
+
+import kotlin.reflect.KVariance;
 
 
 /**
@@ -16,15 +19,18 @@ import android.widget.Scroller;
  */
 public class SlideMenu extends ViewGroup {
     private static final String TAG = "SlideMenu";
+    private final Context mContext;
     private int mSlideViewWidth;
     private View mSlideView;
     private View mContentView;
     Scroller mScroller;
-    private int mWidth;
-    private Context mContext;
+
     private int mLastX;
     private int mStart;
     private int mEnd;
+    private int mWidth;
+    private int scaledTouchSlop;
+    private int dx;
 
     public SlideMenu(Context context) {
         this(context, null);
@@ -38,6 +44,7 @@ public class SlideMenu extends ViewGroup {
         super(context, attrs, defStyleAttr);
         mContext = context;
         mScroller = new Scroller(getContext());
+        scaledTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
         getScreenWidth(context);
     }
 
@@ -76,7 +83,7 @@ public class SlideMenu extends ViewGroup {
             if (!mScroller.isFinished()) {
                 mScroller.abortAnimation();
             }
-            int dx = mLastX - x;
+            dx = mLastX - x;
             //防止向右滑动出现空白页面
             if (dx < -getScrollX()) {
                 dx = 0;
@@ -85,7 +92,7 @@ public class SlideMenu extends ViewGroup {
                 //移动的如果是正数,屏幕向右移动
                 //RestWidth是为了防止向右滑动出现空白页面
                 int RestWidth = mSlideViewWidth - getScrollX();
-                Log.d(TAG, "onTouchEvent: dx-->"+dx);
+                Log.d(TAG, "onTouchEvent: dx-->"+ dx);
                 if (dx > RestWidth) {
                     dx = RestWidth;
                 }
@@ -116,6 +123,14 @@ public class SlideMenu extends ViewGroup {
         }
         postInvalidate();
         return true;
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        if(ev.getAction()==MotionEvent.ACTION_MOVE){
+            return true;
+        }
+        return super.onInterceptTouchEvent(ev);
     }
 
     @Override

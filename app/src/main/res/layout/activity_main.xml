@@ -37,10 +37,11 @@
                 android:text="贝塞尔曲线" />
 
             <Button
+                android:id="@+id/btn_4"
                 android:layout_width="200dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:text="待使用" />
+                android:text="loadingView" />
 
             <Button
                 android:layout_width="200dp"
