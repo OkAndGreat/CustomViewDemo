@@ -8,13 +8,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CustomeView">
-        <activity android:name=".CustomViewDrawing.CustomViewDrawingActivity">
+        <activity android:name=".TextMeasure.TextMeasureActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".XFermode.XfermodeActivity"></activity>
+        <activity android:name=".CustomViewDrawing.CustomViewDrawingActivity"></activity>
     </application>
 
 </manifest>
