@@ -1,6 +1,7 @@
 package com.example.customeview
 
 import android.content.res.Resources
+import android.graphics.drawable.ColorDrawable
 import android.util.TypedValue
 
 //这里也可以使用扩展函数
