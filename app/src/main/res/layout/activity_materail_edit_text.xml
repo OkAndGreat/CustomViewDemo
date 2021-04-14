@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CustomMaterailEditText.MaterailEditTextActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <com.example.customeview.CustomMaterailEditText.MaterialEditText
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="UserName"
-        android:layout_centerInParent="true"/>
-</RelativeLayout>
+        android:background="#30000000">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.example.customeview.CustomMaterailEditText.MaterialEditText
+            android:id="@+id/met"
+            app:useFloatingLabel="false"
+            android:background="@drawable/shape_et"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="Username"/>
+    </FrameLayout>
+
+</LinearLayout>

@@ -4,15 +4,12 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
-import android.text.BoringLayout
-import android.text.Layout
 import android.util.AttributeSet
 import android.util.Log
-import android.widget.TextView
 import androidx.appcompat.widget.AppCompatEditText
 import com.example.customeview.dp
 
-private val TEXT_SIZE = 12.dp
+private val TEXT_SIZE = 18.dp
 private val HORIZONTAL_OFFSET = 5.dp
 private val VERTICAL_OFFSET = 23.dp
 private val EXTRA_VERTICAL_OFFSET = 16.dp
@@ -34,6 +31,10 @@ class MaterialEditText(context: Context, attrs: AttributeSet) : AppCompatEditTex
         paint.textSize = TEXT_SIZE
     }
 
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        setMeasuredDimension(measuredWidth,measuredHeight+100)
+    }
 
     override fun onTextChanged(text: CharSequence?, start: Int, lengthBefore: Int, lengthAfter: Int) {
         if (floatingLabelShown && text.isNullOrEmpty()) {
