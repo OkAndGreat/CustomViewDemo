@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.children
 import kotlin.math.max
 
+
 class TagLayout(context: Context?, attrs: AttributeSet?) : ViewGroup(context, attrs) {
   private val childrenBounds = mutableListOf<Rect>()
 
