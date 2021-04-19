@@ -1,4 +1,4 @@
-package com.example.customeview.custome;
+package com.example.customeview.custom;
 
 import android.content.Context;
 import android.util.AttributeSet;

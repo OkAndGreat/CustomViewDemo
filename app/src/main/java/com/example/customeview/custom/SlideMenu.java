@@ -1,4 +1,4 @@
-package com.example.customeview.custome;
+package com.example.customeview.custom;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -10,8 +10,6 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Scroller;
-
-import kotlin.reflect.KVariance;
 
 
 /**
