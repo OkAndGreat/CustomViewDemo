@@ -12,7 +12,9 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
+import android.widget.OverScroller
 import androidx.core.view.GestureDetectorCompat
+import androidx.core.view.ViewCompat
 import com.example.customeview.R
 import com.example.customeview.dp
 import kotlin.math.max
@@ -31,13 +33,15 @@ class ScalableImageView(context: Context?, attrs: AttributeSet?) : View(context,
     private var originalOffsetX = 0f
     private var originalOffsetY = 0f
     private val gestureDetector = GestureDetectorCompat(context, GestureListener())
-    private val scaleGestureDetector = ScaleGestureDetector(context, scaleGestureListener())
+    private val scaleGestureDetector = ScaleGestureDetector(context, ScaleGestureListener())
     private var currentScale = 0f
         set(value) {
             field = value
             invalidate()
         }
     private var big = false
+    private val FlingRunner = HenFlingRunner()
+    private val scroller = OverScroller(context)
     private val scaleAnimator = ObjectAnimator.ofFloat(this, "currentScale", smallScale, bigScale)
 
 
@@ -67,8 +71,12 @@ class ScalableImageView(context: Context?, attrs: AttributeSet?) : View(context,
         return true
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+        val scaleFraction = (currentScale - smallScale) / (bigScale - smallScale)
+        canvas.translate(offsetX * scaleFraction, offsetY * scaleFraction)
+        canvas.scale(currentScale, currentScale, width / 2f, height / 2f)
+        canvas.drawBitmap(bitmap, originalOffsetX, originalOffsetY, paint)
     }
 
     /**
@@ -94,10 +102,26 @@ class ScalableImageView(context: Context?, attrs: AttributeSet?) : View(context,
             return false
         }
 
-        override fun onDoubleTap(e: MotionEvent?): Boolean {
+        override fun onFling(e1: MotionEvent?, e2: MotionEvent?, velocityX: Float, velocityY: Float): Boolean {
+            if (big) {
+                scroller.fling(offsetX.toInt(), offsetY.toInt(), velocityX.toInt(), velocityY.toInt(),
+                        (- (bitmap.width * bigScale - width) / 2).toInt(),
+                        ((bitmap.width * bigScale - width) / 2).toInt(),
+                        (- (bitmap.height * bigScale - height) / 2).toInt(),
+                        ((bitmap.height * bigScale - height) / 2).toInt()
+                )
+                ViewCompat.postOnAnimation(this@ScalableImageView, FlingRunner)
+            }
+            return false
+        }
+
+        override fun onDoubleTap(e: MotionEvent): Boolean {
             big=!big
             if(big){
-
+                offsetX = (e.x - width / 2f) * (1 - bigScale / smallScale)
+                offsetY = (e.y - height / 2f) * (1 - bigScale / smallScale)
+                fixOffsets()
+                scaleAnimator.start()
             }else{
                 scaleAnimator.reverse()
             }
@@ -105,18 +129,37 @@ class ScalableImageView(context: Context?, attrs: AttributeSet?) : View(context,
         }
     }
 
-    inner class scaleGestureListener:ScaleGestureDetector.OnScaleGestureListener{
-        override fun onScale(detector: ScaleGestureDetector?): Boolean {
-            TODO()
+    inner class ScaleGestureListener:ScaleGestureDetector.OnScaleGestureListener{
+        override fun onScale(detector: ScaleGestureDetector): Boolean {
+            val tempCurrentScale = currentScale * detector.scaleFactor
+            return if (tempCurrentScale < smallScale || tempCurrentScale > bigScale) {
+                false
+            } else {
+                currentScale *= detector.scaleFactor // 0 1; 0 无穷
+                true
+            }
         }
 
-        override fun onScaleBegin(detector: ScaleGestureDetector?): Boolean {
-            TODO()
+        override fun onScaleBegin(detector: ScaleGestureDetector): Boolean {
+            offsetX = (detector.focusX - width / 2f) * (1 - bigScale / smallScale)
+            offsetY = (detector.focusY - height / 2f) * (1 - bigScale / smallScale)
+            return true
         }
 
         override fun onScaleEnd(detector: ScaleGestureDetector?) {
         }
 
+    }
+
+    inner class HenFlingRunner : Runnable {
+        override fun run() {
+            if (scroller.computeScrollOffset()) {
+                offsetX = scroller.currX.toFloat()
+                offsetY = scroller.currY.toFloat()
+                invalidate()
+                ViewCompat.postOnAnimation(this@ScalableImageView, this)
+            }
+        }
     }
 
     private fun getAvatar(resources: Resources, width: Int): Bitmap {
