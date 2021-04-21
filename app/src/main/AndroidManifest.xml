@@ -8,13 +8,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CustomeView">
-        <activity android:name=".ScableImageView.ScalableImageActivity">
+        <activity
+            android:name=".CustomViewDrag.DragActivity"
+            android:label="@string/title_activity_drag"
+            android:theme="@style/Theme.CustomeView.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ScableImageView.ScalableImageActivity" />
         <activity android:name=".CustomLayout.TagLayoutActivity" />
         <activity android:name=".CustomMaterailEditText.MaterailEditTextActivity" />
         <activity android:name=".CustomViewAnimation.AnimationActivity" />

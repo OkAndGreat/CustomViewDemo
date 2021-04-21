@@ -23,7 +23,7 @@ import kotlin.math.min
 private val IMAGE_SIZE = 300.dp.toInt()
 private const val EXTRA_SCALE_FACTOR = 1.5f
 
-class ScalableImageView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
+open class ScalableImageView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val bitmap = getAvatar(resources, IMAGE_SIZE)
     private var smallScale = 0f
@@ -42,7 +42,7 @@ class ScalableImageView(context: Context?, attrs: AttributeSet?) : View(context,
     private var big = false
     private val FlingRunner = HenFlingRunner()
     private val scroller = OverScroller(context)
-    private val scaleAnimator = ObjectAnimator.ofFloat(this, "currentScale", smallScale, bigScale)
+    private val scaleAnimator = ObjectAnimator.ofFloat(this, "currentScale", currentScale, bigScale)
 
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -60,7 +60,6 @@ class ScalableImageView(context: Context?, attrs: AttributeSet?) : View(context,
         }
 
         currentScale = smallScale
-        scaleAnimator.setFloatValues(smallScale, bigScale)
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
@@ -118,12 +117,15 @@ class ScalableImageView(context: Context?, attrs: AttributeSet?) : View(context,
         override fun onDoubleTap(e: MotionEvent): Boolean {
             big=!big
             if(big){
-                offsetX = (e.x - width / 2f) * (1 - bigScale / smallScale)
-                offsetY = (e.y - height / 2f) * (1 - bigScale / smallScale)
+                offsetX = -(e.x - width / 2f)
+                offsetY = -(e.y - height / 2f)
                 fixOffsets()
+                scaleAnimator.setFloatValues(currentScale,bigScale)
                 scaleAnimator.start()
             }else{
-                scaleAnimator.reverse()
+                currentScale=smallScale
+                scaleAnimator.setFloatValues(bigScale,currentScale)
+                scaleAnimator.start()
             }
             return true
         }
@@ -136,13 +138,14 @@ class ScalableImageView(context: Context?, attrs: AttributeSet?) : View(context,
                 false
             } else {
                 currentScale *= detector.scaleFactor // 0 1; 0 无穷
+                scaleAnimator.setFloatValues(currentScale, bigScale)
                 true
             }
         }
 
         override fun onScaleBegin(detector: ScaleGestureDetector): Boolean {
-            offsetX = (detector.focusX - width / 2f) * (1 - bigScale / smallScale)
-            offsetY = (detector.focusY - height / 2f) * (1 - bigScale / smallScale)
+            offsetX = -(detector.focusX - width / 2f)
+            offsetY = -(detector.focusY - height / 2f)
             return true
         }
 
