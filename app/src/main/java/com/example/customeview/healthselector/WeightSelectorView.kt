@@ -29,7 +29,8 @@ class WeightSelectorView(context: Context, attrs: AttributeSet?) : View(context,
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private var weight = 112.5
     private val gestureDetector = GestureDetectorCompat(context, GestureListener())
-//    private val scroller = OverScroller(context)
+
+    //    private val scroller = OverScroller(context)
 //    private val flingRunner = FlingRunner()
     private val fixRunner = FixRunner()
     private var offsetX = 0f
@@ -45,7 +46,7 @@ class WeightSelectorView(context: Context, attrs: AttributeSet?) : View(context,
     }
 
     override fun onDraw(canvas: Canvas) {
-        Log.d(TAG, "onDraw: ")
+        //Log.d(TAG, "onDraw: ")
         val width = width
         val height = height
         //绘制背景和刻度
@@ -91,7 +92,17 @@ class WeightSelectorView(context: Context, attrs: AttributeSet?) : View(context,
         Log.d(TAG, "fixOffsets: offsetX-->$offsetX")
         offsetX = max(offsetX, (-35000).toFloat())
         offsetX = min(offsetX, 35000.toFloat())
-        weight = (112.5 - if (abs(offsetX % 40) <= 20) (offsetX / 40) * 0.1 else (offsetX / 40 * 0.1) + 0.1)
+        Log.d(TAG, "fixOffsets: offsetX%40 --> ${offsetX % 40}")
+        //应该分正负情况
+        weight = if (abs(offsetX % 40) <= 20) {
+            112.5 - (offsetX.toInt() / 40 * 0.1)
+        } else {
+            if (offsetX < 0) {
+                112.5 + (abs(offsetX).toInt() / 40 * 0.1) + 0.1
+            } else {
+                112.5 - (offsetX.toInt() / 40 * 0.1 + 0.1)
+            }
+        }
     }
 
 
@@ -148,21 +159,20 @@ class WeightSelectorView(context: Context, attrs: AttributeSet?) : View(context,
                 } else {
                     if (abs(offsetX % 40) < 1f) {
                         if (offsetX % 40 < 0) {
-                            offsetX-=(offsetX%40)
+                            offsetX -= (offsetX % 40)
                         } else {
-                            offsetX+=(offsetX%40)
+                            offsetX += (offsetX % 40)
                         }
                     } else {
                         if (offsetX % 40 < 0) {
-                            offsetX-=1
+                            offsetX -= 1
                         } else {
-                            offsetX+=1
+                            offsetX += 1
                         }
                     }
-                    offsetX += 1
                 }
                 mHandler.postDelayed(fixRunner, 25)
-                Log.d(TAG, "run:  FixoffsetX-->$offsetX")
+                //Log.d(TAG, "run:  FixoffsetX-->$offsetX")
                 invalidate()
             }
         }
