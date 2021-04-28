@@ -1,13 +1,12 @@
-package com.example.customeview.CustomViewDrag
+package com.example.customeview.healthselector
 
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import com.example.customeview.R
 
-class DragActivity : AppCompatActivity() {
+class WeightSelectorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_drag)
-
+        setContentView(R.layout.activity_weight_selector)
     }
 }

@@ -9,35 +9,14 @@ import android.view.ViewGroup
 import androidx.core.view.children
 import java.util.ArrayList
 
-private const val COLUMNS = 2
-private const val ROWS = 3
-private const val TAG = "DragListenerGridView"
-class DragListenerGridView(context: Context?, attrs: AttributeSet?) : ViewGroup(context, attrs) {
+private const val COLUMNS = 4
+private const val ROWS = 6
+private const val TAG = "MyDragView"
+
+class MyDragView(context: Context?, attrs: AttributeSet?) : ViewGroup(context, attrs) {
     private var dragListener: OnDragListener = DragListener()
     private var draggedView: View? = null
     private var orderedChildren: MutableList<View> = ArrayList()
-//    init {
-//        isChildrenDrawingOrderEnabled = true
-//    }
-
-    override fun onFinishInflate() {
-        super.onFinishInflate()
-        for (child in children) {
-            orderedChildren.add(child) // 初始化位置
-            child.setOnLongClickListener { v ->
-                draggedView = v
-                Log.d(TAG, "onFinishInflate: draggedView被赋值了")
-                v.startDrag(null, DragShadowBuilder(v), v, 0)
-                false
-            }
-            child.setOnDragListener(dragListener)
-        }
-    }
-
-    override fun onDragEvent(event: DragEvent?): Boolean {
-        return super.onDragEvent(event)
-
-    }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val specWidth = MeasureSpec.getSize(widthMeasureSpec)
@@ -55,15 +34,27 @@ class DragListenerGridView(context: Context?, attrs: AttributeSet?) : ViewGroup(
         val childWidth = width / COLUMNS
         val childHeight = height / ROWS
         for ((index, child) in children.withIndex()) {
-            childLeft = index % 2 * childWidth
-            childTop = index / 2 * childHeight
+            childLeft = index % 4 * childWidth
+            childTop = index / 4 * childHeight
             child.layout(0, 0, childWidth, childHeight)
             child.translationX = childLeft.toFloat()
             child.translationY = childTop.toFloat()
         }
     }
 
-
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        for (child in children) {
+            orderedChildren.add(child) // 初始化位置
+            child.setOnLongClickListener { v ->
+                draggedView = v
+                Log.d(TAG, "onFinishInflate: draggedView被赋值了")
+                v.startDrag(null, DragShadowBuilder(v), v, 0)
+                false
+            }
+            child.setOnDragListener(dragListener)
+        }
+    }
 
     private inner class DragListener : OnDragListener {
         override fun onDrag(v: View, event: DragEvent): Boolean {
@@ -84,6 +75,11 @@ class DragListenerGridView(context: Context?, attrs: AttributeSet?) : ViewGroup(
         }
     }
 
+    override fun onDragEvent(event: DragEvent?): Boolean {
+        return super.onDragEvent(event)
+
+    }
+
     private fun sort(targetView: View) {
         var draggedIndex = -1
         var targetIndex = -1
@@ -94,20 +90,28 @@ class DragListenerGridView(context: Context?, attrs: AttributeSet?) : ViewGroup(
                 draggedIndex = index
             }
         }
-        Log.d(TAG, "sort: draggedIndex-->$draggedIndex  targetIndex-->$targetIndex draggedView-->${draggedView!!.id}")
-        orderedChildren.removeAt(draggedIndex)
-        orderedChildren.add(targetIndex, draggedView!!)
-        var childLeft: Int
-        var childTop: Int
+        Log.d(TAG, "sort: draggedIndex-->$draggedIndex  targetIndex-->$targetIndex")
+        val draggedLeft: Int
+        val draggedTop: Int
+        val targetLeft: Int
+        val targetTop: Int
         val childWidth = width / COLUMNS
         val childHeight = height / ROWS
-        for ((index, child) in orderedChildren.withIndex()) {
-            childLeft = index % 2 * childWidth
-            childTop = index / 2 * childHeight
-            child.animate()
-                    .translationX(childLeft.toFloat())
-                    .translationY(childTop.toFloat())
-                    .setDuration(150)
-        }
+
+
+        draggedLeft = draggedIndex % 4 * childWidth;targetLeft = targetIndex % 4 * childWidth
+        draggedTop = draggedIndex / 4 * childHeight;targetTop = targetIndex / 4 * childHeight
+
+        orderedChildren[draggedIndex].animate()
+                .translationX(draggedLeft.toFloat())
+                .translationY(draggedTop.toFloat()).duration = 150
+
+        orderedChildren[targetIndex].animate()
+                .translationX(targetLeft.toFloat())
+                .translationY(targetTop.toFloat()).duration = 150
+
+        orderedChildren.removeAt(draggedIndex)
+        orderedChildren.add(targetIndex, draggedView!!)
     }
+
 }
