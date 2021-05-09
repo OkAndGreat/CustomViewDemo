@@ -66,6 +66,31 @@
             />
 
             <!-- TODO Add Custom attributes here -->
+            <!-- TODO: Add Custom attributes here -->
+            <KeyAttribute
+                motion:framePosition="0"
+                motion:motionTarget="@id/moon">
+                <CustomAttribute
+                    motion:attributeName="colorFilter"
+                    motion:customColorValue="#FFFFFF"
+                    />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="50"
+                motion:motionTarget="@id/moon">
+                <CustomAttribute
+                    motion:attributeName="colorFilter"
+                    motion:customColorValue="#FFB612"
+                    />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="100"
+                motion:motionTarget="@id/moon">
+                <CustomAttribute
+                    motion:attributeName="colorFilter"
+                    motion:customColorValue="#FFFFFF"
+                    />
+            </KeyAttribute>
 
         </KeyFrameSet>
     </Transition>

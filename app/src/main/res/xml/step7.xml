@@ -26,9 +26,10 @@
 
         <!-- Fix OnSwipe by changing touchAnchorSide -->
         <OnSwipe
-                motion:touchAnchorId="@id/moon"
-                motion:touchAnchorSide="bottom"
-        />
+            motion:touchAnchorId="@id/moon"
+            motion:touchAnchorSide="bottom"
+            motion:dragDirection="dragRight"
+            />
 
 
         <KeyFrameSet>
