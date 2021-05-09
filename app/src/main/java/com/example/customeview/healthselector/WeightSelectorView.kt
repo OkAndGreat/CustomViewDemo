@@ -172,7 +172,7 @@ class WeightSelectorView(context: Context, attrs: AttributeSet?) : View(context,
                     }
                 }
                 mHandler.postDelayed(fixRunner, 25)
-                //Log.d(TAG, "run:  FixoffsetX-->$offsetX")
+                Log.d(TAG, "run:  FixoffsetX-->$offsetX")
                 invalidate()
             }
         }
