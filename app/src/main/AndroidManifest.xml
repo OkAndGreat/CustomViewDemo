@@ -8,23 +8,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CustomeView">
-        <activity android:name=".MotionLayout.MotionLayoutActivity">
+        <activity android:name=".TextChangeView.TextChangeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MotionLayout.Step1Activity"/>
-        <activity android:name=".MotionLayout.Step2Activity"/>
-        <activity android:name=".MotionLayout.Step3Activity"/>
-        <activity android:name=".MotionLayout.Step4Activity"/>
-        <activity android:name=".MotionLayout.Step5Activity"/>
-        <activity android:name=".MotionLayout.Step6Activity"/>
-        <activity android:name=".MotionLayout.Step7Activity"/>
-        <activity android:name=".MotionLayout.Step7CompletedActivity"/>
-        <activity android:name=".MotionLayout.Step8Activity"/>
-        <activity android:name=".MotionLayout.Step8CompletedActivity"/>
+        <activity android:name=".MotionLayout.Step1Activity" />
+        <activity android:name=".MotionLayout.Step2Activity" />
+        <activity android:name=".MotionLayout.Step3Activity" />
+        <activity android:name=".MotionLayout.Step4Activity" />
+        <activity android:name=".MotionLayout.Step5Activity" />
+        <activity android:name=".MotionLayout.Step6Activity" />
+        <activity android:name=".MotionLayout.Step7Activity" />
+        <activity android:name=".MotionLayout.Step7CompletedActivity" />
+        <activity android:name=".MotionLayout.Step8Activity" />
+        <activity android:name=".MotionLayout.Step8CompletedActivity" />
         <activity android:name=".healthselector.WeightSelectorActivity" />
         <activity android:name=".viewimpl.ViewImplActivity" />
         <activity android:name=".CustomViewDrag.DragActivity" />
