@@ -1,4 +1,4 @@
-package com.example.customeview.TextChangeView.changed;
+package com.example.customeview.TextChangeView.Other.changed;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
@@ -43,7 +43,7 @@ public class CountView extends View {
     private float mNewOffsetY;
     private float mFraction;
 
-    private boolean mCountToBigger;
+    private boolean mCount2Bigger;
 
     public CountView(Context context) {
         this(context, null);
@@ -103,17 +103,6 @@ public class CountView extends View {
         requestLayout();
     }
 
-    public void setTextOffsetY(float offsetY) {
-        this.mOldOffsetY = offsetY;//变大是从[0,1]，变小是[0,-1]
-        if (mCountToBigger) {//从下到上[-1,0]
-            this.mNewOffsetY = offsetY - mMaxOffsetY;
-        } else {//从上到下[1,0]
-            this.mNewOffsetY = mMaxOffsetY + offsetY;
-        }
-        mFraction = (mMaxOffsetY - Math.abs(mOldOffsetY)) / (mMaxOffsetY - mMinOffsetY);
-        calculateLocation();
-        postInvalidate();
-    }
 
     public float getTextOffsetY() {
         return mMinOffsetY;
@@ -226,10 +215,23 @@ public class CountView extends View {
         startAnim(change > 0);
     }
 
-    public void startAnim(boolean isToBigger) {
-        mCountToBigger = isToBigger;
-        ObjectAnimator textOffsetY = ObjectAnimator.ofFloat(this, "textOffsetY", mMinOffsetY, mCountToBigger ? mMaxOffsetY : -mMaxOffsetY);
+    public void startAnim(boolean is2Bigger) {
+        mCount2Bigger = is2Bigger;
+        ObjectAnimator textOffsetY = ObjectAnimator.ofFloat(this, "textOffsetY",
+                mMinOffsetY, mCount2Bigger ? mMaxOffsetY : -mMaxOffsetY);
         textOffsetY.setDuration(COUNT_ANIM_DURING);
         textOffsetY.start();
+    }
+
+    public void setTextOffsetY(float offsetY) {
+        this.mOldOffsetY = offsetY;//变大是从[0,1]，变小是[0,-1]
+        if (mCount2Bigger) {//从下到上[-1,0]
+            this.mNewOffsetY = offsetY - mMaxOffsetY;
+        } else {//从上到下[1,0]
+            this.mNewOffsetY = mMaxOffsetY + offsetY;
+        }
+        mFraction = (mMaxOffsetY - Math.abs(mOldOffsetY)) / (mMaxOffsetY - mMinOffsetY);
+        calculateLocation();
+        postInvalidate();
     }
 }

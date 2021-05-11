@@ -1,4 +1,4 @@
-package com.example.customeview.TextChangeView.changed;
+package com.example.customeview.TextChangeView.Other.changed;
 
 import android.content.Context;
 import android.view.View;

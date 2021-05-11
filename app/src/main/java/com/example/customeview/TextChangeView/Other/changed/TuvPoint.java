@@ -1,4 +1,4 @@
-package com.example.customeview.TextChangeView.changed;
+package com.example.customeview.TextChangeView.Other.changed;
 
 import android.graphics.Point;
 
@@ -11,7 +11,7 @@ public class TuvPoint {
     float x;
     float y;
 
-    TuvPoint() {
+    public TuvPoint() {
     }
 
     public TuvPoint(float x, float y) {

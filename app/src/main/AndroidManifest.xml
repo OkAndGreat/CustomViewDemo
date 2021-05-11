@@ -8,7 +8,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CustomeView">
-        <activity android:name=".TextChangeView.TextChangeActivity">
+        <activity android:name=".TextChangeView.Other.TextChangeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

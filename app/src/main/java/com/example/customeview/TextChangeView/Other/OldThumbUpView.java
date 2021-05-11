@@ -1,4 +1,4 @@
-package com.example.customeview.TextChangeView;
+package com.example.customeview.TextChangeView.Other;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

@@ -1,4 +1,4 @@
-package com.example.customeview.TextChangeView;
+package com.example.customeview.TextChangeView.Other;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,8 +9,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.customeview.R;
-import com.example.customeview.TextChangeView.changed.ThumbUpView;
-import com.example.customeview.TextChangeView.changed.ThumbView;
+import com.example.customeview.TextChangeView.Other.changed.ThumbUpView;
+import com.example.customeview.TextChangeView.Other.changed.ThumbView;
 
 public class TextChangeActivity extends AppCompatActivity {
     EditText edNum;

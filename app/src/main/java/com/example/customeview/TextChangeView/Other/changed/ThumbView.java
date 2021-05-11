@@ -1,4 +1,4 @@
-package com.example.customeview.TextChangeView.changed;
+package com.example.customeview.TextChangeView.Other.changed;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -14,6 +14,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.Bundle;
 import android.os.Parcelable;
+
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
@@ -24,18 +25,22 @@ import com.example.customeview.R;
 
 
 /**
- * Created by arvinljw on 17/10/25 14:52
- * Function：
- * Desc：
+ * 防止快速点击：
+ * 如果在快速点击的时候执行特定的动画，记录一个点击的次数，
+ * 动画执行完再记录一个执行的数量，只有当点击的次数和执行的次数相等时，
+ * 才根据点击次数判断是点赞还是取消点赞，这里有个巧妙之处，
+ * 假设未点赞的点击数是0，点赞后的点击数是1，那么在所有快速点击结束时，
+ * 点击数如果是奇数则，表示点赞，偶数就是未点赞，再根据状态执行未点赞或点赞的动画。
  */
+
 public class ThumbView extends View {
     //圆圈颜色
     private static final int START_COLOR = Color.parseColor("#00e24d3d");
     private static final int END_COLOR = Color.parseColor("#88e24d3d");
     //缩放动画的时间
-    private static final int SCALE_DURING = 150;
+    private static final int SCALE_DURING = 3000;
     //圆圈扩散动画的时间
-    private static final int RADIUS_DURING = 100;
+    private static final int RADIUS_DURING = 2000;
 
     private static final float SCALE_MIN = 0.9f;
     private static final float SCALE_MAX = 1f;
@@ -129,15 +134,12 @@ public class ThumbView extends View {
         mShining = BitmapFactory.decodeResource(getResources(), R.drawable.ic_messages_like_selected_shining);
     }
 
+    //设置初始状态
     public void setIsThumbUp(boolean isThumbUp) {
         this.mIsThumbUp = isThumbUp;
         mClickCount = mIsThumbUp ? 1 : 0;
         mEndCount = mClickCount;
         postInvalidate();
-    }
-
-    public boolean isThumbUp() {
-        return mIsThumbUp;
     }
 
     public void setThumbUpClickListener(ThumbUpClickListener thumbUpClickListener) {
@@ -185,6 +187,9 @@ public class ThumbView extends View {
         init();
     }
 
+    //canvas.save();与canvas.restore();一般结合使用，
+    // save()函数在前，.restore()函数在后，
+    // 用来保证在这两个函数之间所做的操作不会对原来在canvas上所画图形产生影响
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
