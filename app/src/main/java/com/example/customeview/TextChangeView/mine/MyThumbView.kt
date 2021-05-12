@@ -10,7 +10,6 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.animation.OvershootInterpolator
 import com.example.customeview.R
-import com.example.customeview.TextChangeView.Other.changed.ThumbView
 import com.example.customeview.TextChangeView.Other.changed.TuvPoint
 import com.example.customeview.TextChangeView.Other.changed.TuvUtils
 
@@ -55,10 +54,12 @@ class MyThumbView(context: Context?, attrs: AttributeSet?) : View(context, attrs
     //点击的回调
     private lateinit var mThumbUpClickListener: ThumbUpClickListener
 
-    //被点击的次数，未点击时，未点赞是0，点赞是1，所以点完之后的次数是偶数则就是未点赞，奇数就是点赞
-    private var mClickCount: Int = 0
-    private var mEndCount = 0
-    private lateinit var mThumbUpAnim: AnimatorSet?
+    private var mIsOnAnimation = false
+    private var mThumbUpAnim: AnimatorSet? = null
+
+
+
+
 
     init {
         initBitmapInfo()
@@ -111,8 +112,6 @@ class MyThumbView(context: Context?, attrs: AttributeSet?) : View(context, attrs
     //设置初始状态 mClickCount为1表示处于点赞状态否则为未点赞状态
     fun setIsThumbUp(isThumbUp: Boolean) {
         mIsThumbUp = isThumbUp
-        mClickCount = if (mIsThumbUp) 1 else 0
-        mEndCount = mClickCount
         postInvalidate()
     }
 
@@ -165,12 +164,22 @@ class MyThumbView(context: Context?, attrs: AttributeSet?) : View(context, attrs
         }
     }
 
-    //只有当mClickCount==mEndCount才会执行动画，因为只有这时才表示上一次动画已经执行完
-    private fun startAnim() {
-        mClickCount++
+    //只有当mIsThumbUp才会执行动画，因为只有这时才表示上一次动画已经执行完
+    fun startAnim() {
+        if (!mIsOnAnimation) {
+            mIsThumbUp = if (mIsThumbUp) {
+                startThumbDownAnim()
+                false
+            } else {
+                startThumbUpAnim()
+                true
+            }
+        }
+
     }
 
     private fun startThumbDownAnim() {
+        mIsOnAnimation = true
         val thumbUpScale =
             ObjectAnimator.ofFloat(this, "thumbUpScale", SCALE_MIN, SCALE_MAX)
         thumbUpScale.duration = SCALE_DURING.toLong()
@@ -178,55 +187,63 @@ class MyThumbView(context: Context?, attrs: AttributeSet?) : View(context, attrs
             override fun onAnimationEnd(animation: Animator) {
                 super.onAnimationEnd(animation)
                 mIsThumbUp = false
+                mIsOnAnimation = false
                 setNotThumbUpScale(SCALE_MAX)
-                if (mThumbUpClickListener != null) {
-                    mThumbUpClickListener.thumbDownFinish()
-                }
+                mThumbUpClickListener.thumbDownFinish()
             }
         })
         thumbUpScale.start()
     }
 
     private fun startThumbUpAnim() {
-        val notThumbUpScale = ObjectAnimator.ofFloat(
-            this,
-            "notThumbUpScale",
-            SCALE_MAX,
-            SCALE_MIN
-        )
-        notThumbUpScale.duration = SCALE_DURING.toLong()
-        notThumbUpScale.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                super.onAnimationEnd(animation)
-                mIsThumbUp = true
-            }
-        })
+        mIsOnAnimation = true
+        if (mThumbUpAnim == null) {
+            val notThumbUpScale = ObjectAnimator.ofFloat(
+                this,
+                "notThumbUpScale",
+                SCALE_MAX,
+                SCALE_MIN
+            )
+            notThumbUpScale.duration = SCALE_DURING.toLong()
+            notThumbUpScale.addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    super.onAnimationEnd(animation)
+                    mIsThumbUp = false
+                    mIsThumbUp = true
+                }
+            })
 
-        val thumbUpScale =
-            ObjectAnimator.ofFloat(this, "thumbUpScale", SCALE_MIN, SCALE_MAX)
-        thumbUpScale.duration = SCALE_DURING.toLong()
-        thumbUpScale.interpolator = OvershootInterpolator()
+            val thumbUpScale =
+                ObjectAnimator.ofFloat(this, "thumbUpScale", SCALE_MIN, SCALE_MAX)
+            thumbUpScale.duration = SCALE_DURING.toLong()
+            thumbUpScale.interpolator = OvershootInterpolator()
 
-        val circleScale = ObjectAnimator.ofFloat(this, "circleScale", mRadiusMin, mRadiusMax)
-        circleScale.duration = RADIUS_DURING.toLong()
+            val circleScale = ObjectAnimator.ofFloat(this, "circleScale", mRadiusMin, mRadiusMax)
+            circleScale.duration = RADIUS_DURING.toLong()
 
-        mThumbUpAnim = AnimatorSet()
-        mThumbUpAnim.play(thumbUpScale).with(circleScale)
-        mThumbUpAnim.play(thumbUpScale).after(notThumbUpScale)
-        mThumbUpAnim.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                super.onAnimationEnd(animation)
-                mThumbUpAnim = null
-                if (mThumbUpClickListener != null) {
+            mThumbUpAnim = AnimatorSet()
+            mThumbUpAnim!!.play(thumbUpScale).with(circleScale)
+            mThumbUpAnim!!.play(thumbUpScale).after(notThumbUpScale)
+            mThumbUpAnim!!.addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    super.onAnimationEnd(animation)
                     mThumbUpClickListener.thumbUpFinish()
                 }
-            }
-        })
-        mThumbUpAnim.start()
+            })
+        }
+        mThumbUpAnim!!.start()
     }
 
     private fun setNotThumbUpScale(scale: Float) {
-
+        val matrix = Matrix()
+        matrix.postScale(scale, scale)
+        mThumbNormal =
+            BitmapFactory.decodeResource(resources, R.drawable.ic_messages_like_unselected)
+        mThumbNormal = Bitmap.createBitmap(
+            mThumbNormal, 0, 0, mThumbNormal.width, mThumbNormal.height,
+            matrix, true
+        )
+        postInvalidate()
     }
 
     private fun setThumbUpScale(scale: Float) {
