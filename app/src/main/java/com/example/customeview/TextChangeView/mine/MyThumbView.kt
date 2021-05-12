@@ -7,12 +7,14 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.view.animation.OvershootInterpolator
 import com.example.customeview.R
 import com.example.customeview.TextChangeView.Other.changed.TuvPoint
 import com.example.customeview.TextChangeView.Other.changed.TuvUtils
 
+private const val TAG = "MyThumbView"
 
 class MyThumbView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
     //圆圈颜色
@@ -20,10 +22,10 @@ class MyThumbView(context: Context?, attrs: AttributeSet?) : View(context, attrs
     private val END_COLOR = Color.parseColor("#88e24d3d")
 
     //缩放动画的时间
-    private val SCALE_DURING = 3000
+    private val SCALE_DURING = 150
 
     //圆圈扩散动画的时间
-    private val RADIUS_DURING = 2000
+    private val RADIUS_DURING = 100
 
     private val SCALE_MIN = 0.9f
     private val SCALE_MAX = 1f
@@ -57,8 +59,7 @@ class MyThumbView(context: Context?, attrs: AttributeSet?) : View(context, attrs
     private var mIsOnAnimation = false
     private var mThumbUpAnim: AnimatorSet? = null
 
-
-
+    constructor(context: Context?) : this(context, null)
 
 
     init {
@@ -166,17 +167,11 @@ class MyThumbView(context: Context?, attrs: AttributeSet?) : View(context, attrs
 
     //只有当mIsThumbUp才会执行动画，因为只有这时才表示上一次动画已经执行完
     fun startAnim() {
-        if (!mIsOnAnimation) {
-            mIsThumbUp = if (mIsThumbUp) {
-                startThumbDownAnim()
-                false
-            } else {
-                startThumbUpAnim()
-                true
-            }
-        }
-
+            if (mIsThumbUp) startThumbDownAnim()
+            else startThumbUpAnim()
     }
+
+    fun isOnAnimation()=mIsOnAnimation
 
     private fun startThumbDownAnim() {
         mIsOnAnimation = true
@@ -205,10 +200,11 @@ class MyThumbView(context: Context?, attrs: AttributeSet?) : View(context, attrs
                 SCALE_MIN
             )
             notThumbUpScale.duration = SCALE_DURING.toLong()
+            Log.d(TAG, "startThumbUpAnim: notThumbUpScale.duration-->${notThumbUpScale.duration}")
             notThumbUpScale.addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
                     super.onAnimationEnd(animation)
-                    mIsThumbUp = false
+                    Log.d(TAG, "onAnimationEnd: mIsThumbUp被修改")
                     mIsThumbUp = true
                 }
             })
@@ -227,6 +223,7 @@ class MyThumbView(context: Context?, attrs: AttributeSet?) : View(context, attrs
             mThumbUpAnim!!.addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
                     super.onAnimationEnd(animation)
+                    mIsOnAnimation = false
                     mThumbUpClickListener.thumbUpFinish()
                 }
             })
@@ -234,7 +231,8 @@ class MyThumbView(context: Context?, attrs: AttributeSet?) : View(context, attrs
         mThumbUpAnim!!.start()
     }
 
-    private fun setNotThumbUpScale(scale: Float) {
+    fun setNotThumbUpScale(scale: Float) {
+        Log.d(TAG, "setNotThumbUpScale: scale-->${scale}  misThumbUp-->${mIsThumbUp}")
         val matrix = Matrix()
         matrix.postScale(scale, scale)
         mThumbNormal =
@@ -246,7 +244,7 @@ class MyThumbView(context: Context?, attrs: AttributeSet?) : View(context, attrs
         postInvalidate()
     }
 
-    private fun setThumbUpScale(scale: Float) {
+    fun setThumbUpScale(scale: Float) {
         val matrix = Matrix()
         matrix.postScale(scale, scale)
         mThumbUp = BitmapFactory.decodeResource(resources, R.drawable.ic_messages_like_selected)
@@ -257,7 +255,7 @@ class MyThumbView(context: Context?, attrs: AttributeSet?) : View(context, attrs
         postInvalidate()
     }
 
-    private fun setShiningScale(scale: Float) {
+    fun setShiningScale(scale: Float) {
         val matrix = Matrix()
         matrix.postScale(scale, scale)
         mShining =

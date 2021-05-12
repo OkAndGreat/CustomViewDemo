@@ -10,8 +10,8 @@ import com.example.customeview.R
 import com.example.customeview.TextChangeView.Other.changed.CountView
 import com.example.customeview.TextChangeView.Other.changed.TuvUtils
 
-class MyThumbUpView(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
-    LinearLayout(context, attrs, defStyleAttr), View.OnClickListener {
+class MyThumbUpView(context: Context?, attrs: AttributeSet?) :
+    LinearLayout(context, attrs), View.OnClickListener {
     val DEFAULT_DRAWABLE_PADDING = 4f
     private lateinit var mThumbView: MyThumbView
     private lateinit var mCountView: CountView
@@ -171,12 +171,14 @@ class MyThumbUpView(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) 
     }
 
     override fun onClick(v: View?) {
-        mIsThumbUp = !mIsThumbUp
-        if (mIsThumbUp) {
-            mCountView.calculateChangeNum(1)
-        } else {
-            mCountView.calculateChangeNum(-1)
+        if (!mThumbView.isOnAnimation()) {
+            mIsThumbUp = !mIsThumbUp
+            if (mIsThumbUp) {
+                mCountView.calculateChangeNum(1)
+            } else {
+                mCountView.calculateChangeNum(-1)
+            }
+            mThumbView.startAnim()
         }
-        mThumbView.startAnim()
     }
 }
