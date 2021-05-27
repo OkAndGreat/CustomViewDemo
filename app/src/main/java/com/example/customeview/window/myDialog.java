@@ -40,4 +40,3 @@ public class myDialog extends Dialog {
     }
 }
 
-}

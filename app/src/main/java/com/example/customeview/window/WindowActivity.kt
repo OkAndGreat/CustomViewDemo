@@ -3,7 +3,10 @@ package com.example.customeview.window
 import android.graphics.PixelFormat
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.Gravity
+import android.view.MotionEvent
+import android.view.View
+import android.view.WindowManager
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.customeview.R
@@ -61,15 +64,15 @@ class WindowActivity : AppCompatActivity(), View.OnTouchListener {
         Log.d(TAG, "onTouch: onTouch be called")
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-                downX = event.x.toInt()
-                downY = event.y.toInt()
+                downX = event.rawX.toInt()
+                downY = event.rawY.toInt()
                 rawX = mLayoutParams.x
                 rawY = mLayoutParams.y
             }
             MotionEvent.ACTION_MOVE -> {
                 Log.d(TAG, "onTouch: event.x.toInt()-->${event.x.toInt()}")
-                val dx = event.x.toInt() - downX
-                val dy = event.y.toInt() - downY
+                val dx = event.rawX.toInt() - downX
+                val dy = event.rawY.toInt() - downY
 
                 mLayoutParams.x = rawX + dx
                 mLayoutParams.y = rawY + dy
@@ -80,6 +83,25 @@ class WindowActivity : AppCompatActivity(), View.OnTouchListener {
         }
         return false
     }
+
+//    override fun onTouch(v: View?, event: MotionEvent): Boolean {
+//        val rawX = event.rawX.toInt()
+//        val rawY = event.rawY.toInt()
+//        when (event.action) {
+//            MotionEvent.ACTION_DOWN -> {
+//                downX = event.rawX.toInt()
+//                downY = event.rawY.toInt()
+//            }
+//            MotionEvent.ACTION_MOVE -> {
+//                mLayoutParams.x = rawX
+//                mLayoutParams.y = rawY
+//                mWindowManager.updateViewLayout(mFloatingButton, mLayoutParams)
+//            }
+//            MotionEvent.ACTION_UP -> {
+//            }
+//        }
+//        return false
+//    }
 
     override fun onDestroy() {
         try {
