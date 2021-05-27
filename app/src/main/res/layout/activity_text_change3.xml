@@ -7,7 +7,7 @@
     android:clipChildren="false"
     android:orientation="vertical">
 
-    <com.example.customeview.TextChangeView.Other.OldThumbUpView
+    <com.example.customview.TextChangeView.Other.OldThumbUpView
         android:id="@+id/oldThumbUpView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
         app:o_tuv_count="109" />
 
 
-    <com.example.customeview.TextChangeView.Other.changed.ThumbUpView
+    <com.example.customview.TextChangeView.Other.changed.ThumbUpView
         android:id="@+id/newThumbUpView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

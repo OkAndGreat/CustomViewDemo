@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.example.customeview.CustomMaterailEditText.MaterialEditText
+        <com.example.customview.CustomMaterailEditText.MaterialEditText
             android:id="@+id/met"
             app:useFloatingLabel="false"
             android:background="@drawable/shape_et"

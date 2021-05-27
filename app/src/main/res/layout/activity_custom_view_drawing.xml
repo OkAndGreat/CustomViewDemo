@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".CustomViewDrawing.CustomViewDrawingActivity">
 
-    <com.example.customeview.CustomViewDrawing.PieView
+    <com.example.customview.CustomViewDrawing.PieView
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-<com.example.customeview.CustomViewDrawing.DashboardView
+<com.example.customview.CustomViewDrawing.DashboardView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"/>
 </LinearLayout>

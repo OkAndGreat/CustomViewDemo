@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.customeview.CustomLayout.FlowLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.customview.CustomLayout.FlowLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.customeview.CustomLayout.ColoredTextView
+    <com.example.customview.CustomLayout.ColoredTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="北京市" />
 
-    <com.example.customeview.CustomLayout.ColoredTextView
+    <com.example.customview.CustomLayout.ColoredTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="天津市" />
 
-    <com.example.customeview.CustomLayout.ColoredTextView
+    <com.example.customview.CustomLayout.ColoredTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="上海市" />
 
-    <com.example.customeview.CustomLayout.ColoredTextView
+    <com.example.customview.CustomLayout.ColoredTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="重庆市" />
 
-    <com.example.customeview.CustomLayout.ColoredTextView
+    <com.example.customview.CustomLayout.ColoredTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -33,4 +33,4 @@
         android:text="衡阳市" />
 
 
-</com.example.customeview.CustomLayout.FlowLayout>
+</com.example.customview.CustomLayout.FlowLayout>

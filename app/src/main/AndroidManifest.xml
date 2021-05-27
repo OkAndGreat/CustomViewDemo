@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.customeview">
+    package="com.example.customview">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
@@ -12,34 +12,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CustomeView"
         android:usesCleartextTraffic="true">
-        <activity android:name=".window.WindowActivity">
+        <activity android:name="com.example.customview.window.WindowActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TextChangeView.Other.TextChangeActivity" />
-        <activity android:name=".MotionLayout.Step1Activity" />
-        <activity android:name=".MotionLayout.Step2Activity" />
-        <activity android:name=".MotionLayout.Step3Activity" />
-        <activity android:name=".MotionLayout.Step4Activity" />
-        <activity android:name=".MotionLayout.Step5Activity" />
-        <activity android:name=".MotionLayout.Step6Activity" />
-        <activity android:name=".MotionLayout.Step7Activity" />
-        <activity android:name=".MotionLayout.Step7CompletedActivity" />
-        <activity android:name=".MotionLayout.Step8Activity" />
-        <activity android:name=".MotionLayout.Step8CompletedActivity" />
-        <activity android:name=".healthselector.WeightSelectorActivity" />
-        <activity android:name=".viewimpl.ViewImplActivity" />
-        <activity android:name=".CustomViewDrag.DragActivity" />
-        <activity android:name=".ScableImageView.ScalableImageActivity" />
-        <activity android:name=".CustomLayout.TagLayoutActivity" />
-        <activity android:name=".CustomMaterailEditText.MaterailEditTextActivity" />
-        <activity android:name=".CustomViewAnimation.AnimationActivity" />
-        <activity android:name=".CustomViewClipAndCamera.CameraViewActivity" />
-        <activity android:name=".TextMeasure.TextMeasureActivity" />
-        <activity android:name=".CustomViewDrawing.CustomViewDrawingActivity" />
+        <activity android:name="com.example.customview.TextChangeView.Other.TextChangeActivity" />
+        <activity android:name="com.example.customview.MotionLayout.Step1Activity" />
+        <activity android:name="com.example.customview.MotionLayout.Step2Activity" />
+        <activity android:name="com.example.customview.MotionLayout.Step3Activity" />
+        <activity android:name="com.example.customview.MotionLayout.Step4Activity" />
+        <activity android:name="com.example.customview.MotionLayout.Step5Activity" />
+        <activity android:name="com.example.customview.MotionLayout.Step6Activity" />
+        <activity android:name="com.example.customview.MotionLayout.Step7Activity" />
+        <activity android:name="com.example.customview.MotionLayout.Step7CompletedActivity" />
+        <activity android:name="com.example.customview.MotionLayout.Step8Activity" />
+        <activity android:name="com.example.customview.MotionLayout.Step8CompletedActivity" />
+        <activity android:name="com.example.customview.healthselector.WeightSelectorActivity" />
+        <activity android:name="com.example.customview.viewimpl.ViewImplActivity" />
+        <activity android:name="com.example.customview.CustomViewDrag.DragActivity" />
+        <activity android:name="com.example.customview.ScableImageView.ScalableImageActivity" />
+        <activity android:name="com.example.customview.CustomLayout.TagLayoutActivity" />
+        <activity android:name="com.example.customview.CustomMaterailEditText.MaterailEditTextActivity" />
+        <activity android:name="com.example.customview.CustomViewAnimation.AnimationActivity" />
+        <activity android:name="com.example.customview.CustomViewClipAndCamera.CameraViewActivity" />
+        <activity android:name="com.example.customview.TextMeasure.TextMeasureActivity" />
+        <activity android:name="com.example.customview.CustomViewDrawing.CustomViewDrawingActivity" />
     </application>
 
 </manifest>

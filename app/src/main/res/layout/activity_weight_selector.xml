@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".healthselector.WeightSelectorActivity">
 
-    <com.example.customeview.healthselector.WeightSelectorView
+    <com.example.customview.healthselector.WeightSelectorView
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

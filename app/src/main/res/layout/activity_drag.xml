@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".CustomViewDrag.DragActivity">
 
-    <com.example.customeview.CustomViewDrag.MyDragView
+    <com.example.customview.CustomViewDrag.MyDragView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <View
@@ -39,5 +39,5 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#546E7A" />
-    </com.example.customeview.CustomViewDrag.MyDragView>
+    </com.example.customview.CustomViewDrag.MyDragView>
 </LinearLayout>

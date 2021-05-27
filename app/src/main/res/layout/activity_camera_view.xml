@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".CustomViewClipAndCamera.CameraViewActivity">
 
-    <com.example.customeview.CustomViewClipAndCamera.CameraView
+    <com.example.customview.CustomViewClipAndCamera.CameraView
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

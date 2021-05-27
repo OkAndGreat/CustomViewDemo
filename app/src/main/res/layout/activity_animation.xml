@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".CustomViewAnimation.AnimationActivity">
 
-    <com.example.customeview.CustomViewAnimation.provinceView
+    <com.example.customview.CustomViewAnimation.provinceView
         android:id="@+id/provinceView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

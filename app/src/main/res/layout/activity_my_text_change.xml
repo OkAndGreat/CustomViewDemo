@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".TextChangeView.mine.MyTextChangeActivity">
 
-    <com.example.customeview.TextChangeView.mine.MyThumbUpView
+    <com.example.customview.TextChangeView.mine.MyThumbUpView
         android:id="@+id/ThumbView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

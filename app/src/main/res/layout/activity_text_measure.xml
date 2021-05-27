@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".TextMeasure.TextMeasureActivity">
 
-    <com.example.customeview.TextMeasure.SportView
+    <com.example.customview.TextMeasure.SportView
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
