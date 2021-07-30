@@ -95,7 +95,6 @@ class MyThumbView(context: Context?, attrs: AttributeSet?) : View(context, attrs
         mShiningPoint = TuvPoint()
         mThumbPoint = TuvPoint()
         //这个相对位置是在布局中试出来的
-        //这个相对位置是在布局中试出来的
         mShiningPoint.x = (paddingLeft + TuvUtils.dip2px(context, 2f)).toFloat()
         mShiningPoint.y = paddingTop.toFloat()
         mThumbPoint.x = paddingLeft.toFloat()

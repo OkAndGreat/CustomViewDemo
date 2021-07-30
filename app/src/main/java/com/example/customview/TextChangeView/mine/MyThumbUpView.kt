@@ -56,8 +56,6 @@ class MyThumbUpView(context: Context?, attrs: AttributeSet?) :
         addCountView()
 
         //把设置的padding分解到子view，否则对超出view范围的动画显示不全
-
-        //把设置的padding分解到子view，否则对超出view范围的动画显示不全
         setPadding(0, 0, 0, 0, false)
         setOnClickListener(this)
     }
@@ -71,7 +69,7 @@ class MyThumbUpView(context: Context?, attrs: AttributeSet?) :
         addView(mCountView, getCountParams())
     }
 
-    fun setPadding(left: Int, top: Int, right: Int, bottom: Int, needChange: Boolean) {
+    private fun setPadding(left: Int, top: Int, right: Int, bottom: Int, needChange: Boolean) {
         mNeedChangeChildView = needChange
         setPadding(left, top, right, bottom)
     }

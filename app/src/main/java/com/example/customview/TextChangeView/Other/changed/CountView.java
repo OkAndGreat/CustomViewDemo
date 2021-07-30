@@ -25,7 +25,7 @@ import com.example.customview.R;
 public class CountView extends View {
     public static final String DEFAULT_TEXT_COLOR = "#cccccc";
     public static final float DEFAULT_TEXT_SIZE = 15f;
-    private static final int COUNT_ANIM_DURING = 250;
+    private static final int COUNT_ANIM_DURING = 5000;
 
     private Paint mTextPaint;
     private float mTextSize;
@@ -115,7 +115,7 @@ public class CountView extends View {
     }
 
     private int getContentWidth() {
-        return (int) Math.ceil(mTextPaint.measureText(String.valueOf(mCount)));
+        return (int) Math.ceil(mTextPaint.measureText(String.valueOf(mCount)+"   / 9"));
     }
 
     private int getContentHeight() {
@@ -161,6 +161,10 @@ public class CountView extends View {
         //变化后部分
         mTextPaint.setColor((Integer) TuvUtils.evaluate(mFraction, mTextColor, mEndTextColor));
         canvas.drawText(String.valueOf(mTexts[2]), mTextPoints[2].x, mTextPoints[2].y, mTextPaint);
+
+        //后缀
+        mTextPaint.setColor(mTextColor);
+        canvas.drawText("   / 9",mTextPoints[1].x+mTextPoints[0].x,mTextPoints[0].y,mTextPaint);
     }
 
     @Override
