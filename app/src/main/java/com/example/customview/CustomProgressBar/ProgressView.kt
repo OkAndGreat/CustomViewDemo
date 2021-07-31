@@ -27,7 +27,7 @@ class ProgressView(context: Context) :
 
     private var averageWidth = 0F
 
-    private var maxCount = 5
+    private var maxCount = 0
     private var curCount = 0
 
     private lateinit var Animator: ValueAnimator

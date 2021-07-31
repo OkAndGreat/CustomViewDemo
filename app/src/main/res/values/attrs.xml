@@ -26,4 +26,9 @@
         <attr name="tuv_drawable_padding" format="dimension"/>
         <attr name="tuv_isThumbUp" format="boolean"/>
     </declare-styleable>
+
+    <declare-styleable name="ProgressLayout">
+        <attr name="max_count" format="integer"/>
+        <attr name="cur_count" format="integer"/>
+    </declare-styleable>
 </resources>

@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -22,7 +23,9 @@ import com.example.customview.R;
  * Desc：
  */
 @SuppressWarnings("unused")
+
 public class CountView extends View {
+    private static final String TAG="CountView";
     public static final String DEFAULT_TEXT_COLOR = "#cccccc";
     public static final float DEFAULT_TEXT_SIZE = 15f;
     private static final int COUNT_ANIM_DURING = 5000;
@@ -33,6 +36,7 @@ public class CountView extends View {
     private int mEndTextColor;
 
     private int mCount;
+    private int mMaxCount;
     private String[] mTexts;//mTexts[0]是不变的部分，mTexts[1]原来的部分，mTexts[2]变化后的部分
     private TuvPoint[] mTextPoints;//表示各部分的坐标
 
@@ -65,10 +69,11 @@ public class CountView extends View {
 
     private void init() {
         mTexts = new String[3];
-        mTextPoints = new TuvPoint[3];
+        mTextPoints = new TuvPoint[4];
         mTextPoints[0] = new TuvPoint();
         mTextPoints[1] = new TuvPoint();
         mTextPoints[2] = new TuvPoint();
+        mTextPoints[3] = new TuvPoint();
         calculateChangeNum(0);
 
         mMinOffsetY = 0;
@@ -90,6 +95,10 @@ public class CountView extends View {
         this.mCount = mCount;
         calculateChangeNum(0);
         requestLayout();
+    }
+
+    public void setMaxCount(int mMaxCount) {
+        this.mMaxCount = mMaxCount;
     }
 
     public void setTextColor(int mTextColor) {
@@ -115,7 +124,7 @@ public class CountView extends View {
     }
 
     private int getContentWidth() {
-        return (int) Math.ceil(mTextPaint.measureText(String.valueOf(mCount)+"   / 9"));
+        return (int) Math.ceil(mTextPaint.measureText(String.valueOf(mCount)+"   /  "+mMaxCount));
     }
 
     private int getContentHeight() {
@@ -140,10 +149,12 @@ public class CountView extends View {
         mTextPoints[0].x = getPaddingLeft();
         mTextPoints[1].x = getPaddingLeft() + unChangeWidth;
         mTextPoints[2].x = getPaddingLeft() + unChangeWidth;
+        mTextPoints[3].x = getPaddingLeft() + unChangeWidth + textWidth * (mTexts[1].length()+mTexts[0].length());
 
         mTextPoints[0].y = y;
         mTextPoints[1].y = y - mOldOffsetY;
         mTextPoints[2].y = y - mNewOffsetY;
+        mTextPoints[3].y = y;
     }
 
     @Override
@@ -164,7 +175,8 @@ public class CountView extends View {
 
         //后缀
         mTextPaint.setColor(mTextColor);
-        canvas.drawText("   / 9",mTextPoints[1].x+mTextPoints[0].x,mTextPoints[0].y,mTextPaint);
+        Log.d(TAG, "onDraw: mTextPoints[3].x-->"+mTextPoints[3].x);
+        canvas.drawText("   / "+mMaxCount,mTextPoints[3].x,mTextPoints[3].y,mTextPaint);
     }
 
     @Override

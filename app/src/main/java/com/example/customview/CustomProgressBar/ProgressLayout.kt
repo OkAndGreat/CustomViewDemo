@@ -4,21 +4,28 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.Gravity
 import android.widget.LinearLayout
+import com.example.customview.R
 import com.example.customview.TextChangeView.Other.changed.CountView
 
-class ProgressLayout(context: Context?, attrs: AttributeSet?) :
+class ProgressLayout(context: Context, attrs: AttributeSet?) :
     LinearLayout(context, attrs) {
 
     private lateinit var mProgressView: ProgressView
-    private lateinit var mTextView: CountView
+    private lateinit var mCountView: CountView
 
-    private var maxCount = 5
+    private var maxCount = 0
     private var curCount = 0
 
-    //TODO:用typedArray初始化属性
     init {
-
         init()
+        val typedArray =
+            context.obtainStyledAttributes(attrs, R.styleable.ProgressLayout)
+        maxCount = typedArray.getInt(R.styleable.ProgressLayout_max_count, 0)
+        curCount = typedArray.getInt(R.styleable.ProgressLayout_cur_count,0)
+        mProgressView.setMaxCount(maxCount)
+        mCountView.setMaxCount(maxCount)
+        setCurCount(curCount)
+        typedArray.recycle()
     }
 
     private fun init() {
@@ -26,7 +33,7 @@ class ProgressLayout(context: Context?, attrs: AttributeSet?) :
         orientation = VERTICAL
 
         addTextView()
-        mTextView.count = 0
+        mCountView.count = 0
         addProgressView()
     }
 
@@ -45,8 +52,8 @@ class ProgressLayout(context: Context?, attrs: AttributeSet?) :
     }
 
     private fun addTextView() {
-        mTextView = CountView(context)
-        addView(mTextView, getTextViewParams())
+        mCountView = CountView(context)
+        addView(mCountView, getTextViewParams())
     }
 
     private fun getTextViewParams(): LayoutParams {
@@ -60,9 +67,9 @@ class ProgressLayout(context: Context?, attrs: AttributeSet?) :
     }
 
 
-    fun setCurCount() {
-        mProgressView.setCurCount(5)
-        mTextView.calculateChangeNum(9)
+    fun setCurCount(Count: Int) {
+        mProgressView.setCurCount(Count)
+        mCountView.calculateChangeNum(Count)
     }
 
 }
