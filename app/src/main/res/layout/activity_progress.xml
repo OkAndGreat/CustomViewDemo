@@ -10,15 +10,21 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="这是商品一"
+        android:text="你的邮票到账啦~点击领取~"
         android:layout_gravity="center"/>
 
     <com.example.customview.CustomProgressBar.ProgressLayout
         android:id="@+id/progressLayout"
         android:layout_margin="20dp"
         app:max_count="15"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="签到"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
