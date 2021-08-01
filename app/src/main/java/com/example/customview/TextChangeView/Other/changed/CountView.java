@@ -25,7 +25,7 @@ import com.example.customview.R;
 @SuppressWarnings("unused")
 
 public class CountView extends View {
-    private static final String TAG="CountView";
+    private static final String TAG = "CountView";
     public static final String DEFAULT_TEXT_COLOR = "#cccccc";
     public static final float DEFAULT_TEXT_SIZE = 15f;
     private static final int COUNT_ANIM_DURING = 5000;
@@ -46,6 +46,8 @@ public class CountView extends View {
     private float mOldOffsetY;
     private float mNewOffsetY;
     private float mFraction;
+
+    private int mCarryNum;
 
     private boolean mCount2Bigger;
 
@@ -119,12 +121,12 @@ public class CountView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        setMeasuredDimension(TuvUtils.getDefaultSize(widthMeasureSpec, getContentWidth() + getPaddingLeft() + getPaddingRight()),
+        setMeasuredDimension(TuvUtils.getDefaultSize(widthMeasureSpec, getContentWidth() + getPaddingLeft() + getPaddingRight() * 2),
                 TuvUtils.getDefaultSize(heightMeasureSpec, getContentHeight() + getPaddingTop() + getPaddingBottom()));
     }
 
     private int getContentWidth() {
-        return (int) Math.ceil(mTextPaint.measureText(String.valueOf(mCount)+"   /  "+mMaxCount));
+        return (int) Math.ceil(mTextPaint.measureText(String.valueOf(mCount) + "   /  " + mMaxCount));
     }
 
     private int getContentHeight() {
@@ -149,7 +151,7 @@ public class CountView extends View {
         mTextPoints[0].x = getPaddingLeft();
         mTextPoints[1].x = getPaddingLeft() + unChangeWidth;
         mTextPoints[2].x = getPaddingLeft() + unChangeWidth;
-        mTextPoints[3].x = getPaddingLeft() + unChangeWidth + textWidth * (mTexts[1].length()+mTexts[0].length());
+        mTextPoints[3].x = getPaddingLeft() + unChangeWidth + (1 - mFraction) * (textWidth * mCarryNum);
 
         mTextPoints[0].y = y;
         mTextPoints[1].y = y - mOldOffsetY;
@@ -175,8 +177,8 @@ public class CountView extends View {
 
         //后缀
         mTextPaint.setColor(mTextColor);
-        Log.d(TAG, "onDraw: mTextPoints[3].x-->"+mTextPoints[3].x);
-        canvas.drawText("   / "+mMaxCount,mTextPoints[3].x,mTextPoints[3].y,mTextPaint);
+        Log.d(TAG, "onDraw: mTextPoints[3].x-->" + mTextPoints[3].x);
+        canvas.drawText("   / " + mMaxCount, mTextPoints[3].x, mTextPoints[3].y, mTextPaint);
     }
 
     @Override
@@ -217,6 +219,8 @@ public class CountView extends View {
         String oldNum = String.valueOf(mCount);
         String newNum = String.valueOf(mCount + change);
 
+        mCarryNum = newNum.length() - oldNum.length();
+
         for (int i = 0; i < oldNum.length(); i++) {
             char oldC = oldNum.charAt(i);
             char newC = newNum.charAt(i);
@@ -235,6 +239,7 @@ public class CountView extends View {
         mCount2Bigger = is2Bigger;
         ObjectAnimator textOffsetY = ObjectAnimator.ofFloat(this, "textOffsetY",
                 mMinOffsetY, mCount2Bigger ? mMaxOffsetY : -mMaxOffsetY);
+
         textOffsetY.setDuration(COUNT_ANIM_DURING);
         textOffsetY.start();
     }

@@ -32,7 +32,7 @@ class ProgressLayout(context: Context, attrs: AttributeSet?) :
         removeAllViews()
         orientation = VERTICAL
 
-        addTextView()
+        addCountView()
         mCountView.count = 0
         addProgressView()
     }
@@ -51,12 +51,12 @@ class ProgressLayout(context: Context, attrs: AttributeSet?) :
         return params
     }
 
-    private fun addTextView() {
+    private fun addCountView() {
         mCountView = CountView(context)
-        addView(mCountView, getTextViewParams())
+        addView(mCountView, getCountViewParams())
     }
 
-    private fun getTextViewParams(): LayoutParams {
+    private fun getCountViewParams(): LayoutParams {
         val params = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
         params.leftMargin = paddingLeft
         params.rightMargin = paddingRight

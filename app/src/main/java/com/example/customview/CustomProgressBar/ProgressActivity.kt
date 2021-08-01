@@ -11,7 +11,7 @@ class ProgressActivity : AppCompatActivity() {
         setContentView(R.layout.activity_progress)
 
         progressLayout.post {
-            progressLayout.setCurCount(4)
+            progressLayout.setCurCount(12)
         }
 
     }
