@@ -9,7 +9,7 @@ class ProgressActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_progress)
-
+        progressLayout.setMaxCount(20)
         progressLayout.post {
             progressLayout.setCurCount(12)
         }

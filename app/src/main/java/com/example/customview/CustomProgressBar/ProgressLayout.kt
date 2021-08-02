@@ -21,9 +21,8 @@ class ProgressLayout(context: Context, attrs: AttributeSet?) :
             context.obtainStyledAttributes(attrs, R.styleable.ProgressLayout)
         maxCount = typedArray.getInt(R.styleable.ProgressLayout_max_count, 0)
         curCount = typedArray.getInt(R.styleable.ProgressLayout_cur_count, 0)
-        mProgressView.setMaxCount(maxCount)
-        mCountView.setMaxCount(maxCount)
         setCurCount(curCount)
+        setMaxCount(maxCount)
         typedArray.recycle()
     }
 
@@ -76,5 +75,11 @@ class ProgressLayout(context: Context, attrs: AttributeSet?) :
         mProgressView.setCurCount(Count)
         mCountView.calculateChangeNum(Count)
     }
+
+    fun setMaxCount(Count: Int){
+        mProgressView.setMaxCount(Count)
+        mCountView.setMaxCount(Count)
+    }
+
 
 }

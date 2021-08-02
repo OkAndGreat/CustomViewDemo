@@ -10,14 +10,16 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:textSize="10sp"
+        android:maxLength="20"
         android:text="你的邮票到账啦~点击领取~"
         android:layout_gravity="center"/>
 
     <com.example.customview.CustomProgressBar.ProgressLayout
         android:id="@+id/progressLayout"
         android:layout_margin="20dp"
-        app:max_count="15"
-        android:layout_width="100dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
 
@@ -25,6 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginRight="30dp"
         android:text="签到"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
