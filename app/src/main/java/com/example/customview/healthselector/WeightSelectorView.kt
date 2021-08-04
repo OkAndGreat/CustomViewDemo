@@ -61,8 +61,7 @@ class WeightSelectorView(context: Context, attrs: AttributeSet?) : View(context,
             else canvas.drawLine(offsetX + width / 2.toFloat() - 35000 + i * 40, height / 2.toFloat(),
                     offsetX + width / 2.toFloat() - 35000 + i * 40, height / 2.toFloat() + 100.toFloat(), paint)
         }
-
-
+        
         //绘制文字和瞄准线
         paint.color = Color.rgb(73, 191, 118)
         canvas.drawText(String.format("%.1f", weight) + "Kg", width / 2.toFloat(), height / 2.toFloat() - 150, paint)

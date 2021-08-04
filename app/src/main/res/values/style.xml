@@ -16,6 +16,10 @@
         <item name="android:windowEnterAnimation">@anim/dialog_enter_anim</item>
         <item name="android:windowExitAnimation">@anim/dialog_exit_anim</item>
     </style>
+
+    <style name="CustomDialog" parent="android:Theme.Dialog">
+        <item name="android:windowBackground">@drawable/custom_dialog_bg</item>
+    </style>
 </resources>
 
 

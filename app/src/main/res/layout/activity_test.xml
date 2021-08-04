@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.customview.test.CustomLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".test.TestActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_margin="50dp"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_margin="50dp"
         android:background="@drawable/background_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,17 +52,17 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.example.customview.test.MyLinearLayout
-        android:clickable="true"
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="邮票小店" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:overScrollMode="never"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </com.example.customview.test.MyLinearLayout>
+        android:layout_height="match_parent"
+        android:overScrollMode="never" />
 
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+</com.example.customview.test.CustomLinearLayout>
