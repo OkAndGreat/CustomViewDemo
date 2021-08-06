@@ -10,10 +10,7 @@ class ProgressActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_progress)
         progressLayout.setMaxCount(20)
-        progressLayout.post {
-            progressLayout.setCurCount(12)
-        }
-
+        progressLayout.post { progressLayout.setCurCount(12)}
     }
 
 }
