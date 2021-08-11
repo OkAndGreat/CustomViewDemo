@@ -3,12 +3,13 @@ package com.example.customview.CustomLayoutMnager;
 import android.graphics.Canvas;
 import android.view.View;
 
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.customview.CustomLayoutMnager.adapter.UniversalAdapter;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -73,6 +74,21 @@ public class SwipeCardCallback extends ItemTouchHelper.SimpleCallback {
             }
         }
     }
+
+//    @Override
+//    public void onChildDraw(@NonNull @NotNull Canvas c, @NonNull @NotNull RecyclerView recyclerView, @NonNull @NotNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+//        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+//        int itemCount = recyclerView.getChildCount();
+//        for (int i = 0; i < itemCount; i++) {
+//            View view = recyclerView.getChildAt(i);
+//            int level = itemCount - i - 1;
+//            view.setTranslationY((float) (CardConfig.TRANS_Y_GAP * level - CardConfig.TRANS_Y_GAP));
+//            view.setScaleX((float) (1 - CardConfig.SCALE_GAP * level + CardConfig.SCALE_GAP));
+//            view.setScaleY((float) (1 - CardConfig.SCALE_GAP * level + CardConfig.SCALE_GAP));
+//        }
+//
+//    }
+
 
 //    @Override
 //    public long getAnimationDuration(@NonNull RecyclerView recyclerView, int animationType, float animateDx, float animateDy) {

@@ -14,7 +14,8 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".customdialog.CustomDialogActivity">
         </activity>
-        <activity android:name=".test.TestActivity"></activity>
+        <activity android:name=".test.TestActivity">
+        </activity>
         <activity android:name=".CustomProgressBar.ProgressActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +24,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MotionLayout.UserActivity" />
-        <activity android:name=".TextChangeView.mine.MyTextChangeActivity" />
+        <activity android:name=".TextChangeView.mine.MyTextChangeActivity" >
+        </activity>
         <activity android:name=".MotionLayout.Step1Activity" />
         <activity android:name=".MotionLayout.Step2Activity" />
         <activity android:name=".MotionLayout.Step3Activity" />
@@ -37,6 +39,8 @@
         <activity android:name=".healthselector.WeightSelectorActivity" />
         <activity android:name=".viewimpl.ViewImplActivity" />
         <activity android:name=".CustomViewDrag.DragActivity" />
+        <activity android:name=".CustomLayoutMnager.CustomMangerActivity">
+        </activity>
         <activity android:name=".ScableImageView.ScalableImageActivity" />
         <activity android:name=".CustomLayout.TagLayoutActivity" />
         <activity android:name=".CustomMaterailEditText.MaterailEditTextActivity" />

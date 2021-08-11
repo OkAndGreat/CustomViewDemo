@@ -32,7 +32,7 @@ class ProgressLayout(context: Context, attrs: AttributeSet?) :
 
         addProgressView()
         addCountView()
-        mCountView.setCount(0)
+        mCountView.initCount(0)
     }
 
     //将ProgressView添加到线性布局中

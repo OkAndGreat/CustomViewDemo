@@ -16,4 +16,16 @@
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#000000</color>
     <color name="vifrification">#00000000</color>
+    <!--    邮票明细页面color值-->
+    <color name="mine_stamp_detail_base_color">#F2F3F8</color>
+
+    <color name="mine_stamp_detail_decoration">#DFE8F5</color>
+
+    <color name="mine_stamp_exchange_detail_blue">#6C69F1</color>
+    <color name="mine_stamp_exchange_detail_grey">#979797</color>
+    <color name="mine_stamp_title">#15315B</color>
+    <color name="mine_stamp_number">#5177FF</color>
+    <color name="mine_stamp_item_title_small">#6615315B</color>
+    <color name="mine_stamp_item_title">#15315B</color>
+    <color name="mine_stamp_background">#fbfcff</color>
 </resources>

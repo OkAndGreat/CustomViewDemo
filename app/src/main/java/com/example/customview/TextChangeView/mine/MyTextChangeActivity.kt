@@ -18,5 +18,6 @@ class MyTextChangeActivity : AppCompatActivity() {
                 //"thumbDownFinish".show(this@MyTextChangeActivity)
             }
         })
+        tv.setCount(11)
     }
 }

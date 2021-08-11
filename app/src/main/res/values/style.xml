@@ -20,6 +20,423 @@
     <style name="CustomDialog" parent="android:Theme.Dialog">
         <item name="android:windowBackground">@drawable/custom_dialog_bg</item>
     </style>
+
+    <!--    邮票明细页面text appearance-->
+    <style name="mine_stamp_exchange_name">
+
+        <item name="android:textSize">
+            16sp
+        </item>
+
+        <item name="android:textColor">
+            #15315B
+        </item>
+
+    </style>
+
+    <style name="mine_stamp_exchange_simple_time">
+
+        <item name="android:textSize">
+            12sp
+        </item>
+
+        <item name="android:textColor">
+            #6615315B
+        </item>
+
+    </style>
+
+    <style name="mine_stamp_exchange_count">
+
+        <item name="android:textSize">
+            16sp
+        </item>
+
+        <item name="android:textColor">
+            #4B66F0
+        </item>
+
+    </style>
+
+    <style name="mine_stamp_exchange_get_count">
+
+        <item name="android:textSize">
+            16sp
+        </item>
+
+        <item name="android:textColor">
+            #FFA92F
+        </item>
+
+    </style>
+
+    <style name="mine_stamp_exchange_detail">
+
+        <item name="android:textSize">
+            22sp
+        </item>
+
+        <item name="android:textColor">
+            #15315B
+        </item>
+
+    </style>
+
+    <style name="mine_stamp_exchange_detail_code_num">
+
+        <item name="android:textSize">
+            14sp
+        </item>
+
+        <item name="android:textColor">
+            #CCFFFFFF
+        </item>
+
+    </style>
+
+    <style name="mine_stamp_exchange_real_code_num">
+
+        <item name="android:textSize">
+            23sp
+        </item>
+
+        <item name="android:textColor">
+            #E6FFFFFF
+        </item>
+
+    </style>
+
+    <style name="mine_stamp_exchange_ps">
+
+        <item name="android:textSize">
+            11sp
+        </item>
+
+        <item name="android:textColor">
+            #99FFFFFF
+        </item>
+
+    </style>
+
+    <style name="mine_stamp_exchange_goods_detail">
+
+        <item name="android:textSize">
+            16sp
+        </item>
+
+        <item name="android:textColor">
+            #15315B
+        </item>
+
+    </style>
+
+    <style name="mine_stamp_exchange_common">
+
+        <item name="android:textSize">
+            14sp
+        </item>
+
+        <item name="android:textColor">
+            #15315B
+        </item>
+
+    </style>
+
+    <style name="mine_stamp_exchange_under_collected">
+
+        <item name="android:textSize">
+            11sp
+        </item>
+
+        <item name="android:textColor">
+            #94A6C4
+        </item>
+
+    </style>
+
+    <!--    装扮详情页面 text appearance-->
+
+    <style name="mine_decoration_detail_goods_name">
+
+        <item name="android:textSize">
+            18sp
+        </item>
+
+        <item name="android:textColor">
+            #15315B
+        </item>
+
+    </style>
+
+    <style name="mine_decoration_detail_Inventory">
+
+        <item name="android:textSize">
+            13sp
+        </item>
+
+        <item name="android:letterSpacing">
+            0.02
+        </item>
+
+        <item name="android:textColor">
+            #6615315B
+        </item>
+
+    </style>
+
+    <style name="mine_decoration_detail_goods_decoration">
+
+        <item name="android:textSize">
+            16sp
+        </item>
+
+        <item name="android:letterSpacing">
+            0.02
+        </item>
+
+        <item name="android:textColor">
+            #CC15315B
+        </item>
+
+    </style>
+
+    <style name="mine_decoration_detail_Validity">
+
+        <item name="android:textSize">
+            13sp
+        </item>
+
+        <item name="android:letterSpacing">
+            0.02
+        </item>
+
+        <item name="android:textColor">
+            #CC15315B
+        </item>
+
+    </style>
+
+    <style name="mine_decoration_detail_rights">
+
+        <item name="android:textSize">
+            14sp
+        </item>
+
+        <item name="android:textColor">
+            #CC15315B
+        </item>
+
+    </style>
+
+    <style name="mine_decoration_detail_rights_detail">
+
+        <item name="android:textSize">
+            14sp
+        </item>
+
+        <item name="android:letterSpacing">
+            0.03
+        </item>
+
+        <item name="android:textColor">
+            #6615315B
+        </item>
+
+    </style>
+
+    <style name="mine_decoration_detail_cost_count">
+
+        <item name="android:textSize">
+            18sp
+        </item>
+
+        <item name="android:textColor">
+            #5177FF
+        </item>
+
+    </style>
+
+    <style name="mine_decoration_detail_rest_count">
+
+        <item name="android:textSize">
+            11sp
+        </item>
+
+        <item name="android:textColor">
+            #6615315B
+        </item>
+
+    </style>
+
+    <style name="mine_decoration_detail_btn">
+
+        <item name="android:textSize">
+            16sp
+        </item>
+
+        <item name="android:textColor">
+            #FFFFFF
+        </item>
+
+    </style>
+
+    <!--    商品详情dialog 相关文字的 text appearance-->
+
+    <style name="mine_goods_detail_dialog_ps">
+
+        <item name="android:textSize">
+            14sp
+        </item>
+
+        <item name="android:letterSpacing">
+            0.03
+        </item>
+
+        <item name="android:textColor">
+            #15315B
+        </item>
+
+    </style>
+
+    <style name="mine_goods_detail_dialog_cancel">
+
+        <item name="android:textSize">
+            14sp
+        </item>
+
+        <item name="android:letterSpacing">
+            0.04
+        </item>
+
+        <item name="android:textColor">
+            #FFFFFF
+        </item>
+
+    </style>
+
+    <style name="mine_goods_detail_dialog_sure">
+
+        <item name="android:textSize">
+            14sp
+        </item>
+
+        <item name="android:letterSpacing">
+            0.04
+        </item>
+
+        <item name="android:textColor">
+            #FFFFFF
+        </item>
+
+    </style>
+
+    <style name="mine_tab_style">
+        <item name="android:textSize">18sp</item>
+
+        <item name="android:unselectedAlpha">0.6</item>
+    </style>
+
+    <!--    邮票中心相关 text appearance-->
+
+    <style name="mine_stamp_center_my_stamp">
+
+        <item name="android:textSize">
+            12sp
+        </item>
+
+        <item name="android:textColor">
+            #FFFFFF
+        </item>
+
+    </style>
+
+    <style name="mine_stamp_center_detail">
+
+        <item name="android:textSize">
+            10sp
+        </item>
+
+        <item name="android:textColor">
+            #CFCEF9
+        </item>
+
+    </style>
+
+    <style name="mine_stamp_center_count">
+
+        <item name="android:textSize">
+            45sp
+        </item>
+
+        <item name="android:textColor">
+            #FFFFFF
+        </item>
+
+    </style>
+
+    <style name="mine_stamp_center_ps">
+
+        <item name="android:textSize">
+            12sp
+        </item>
+
+        <item name="android:textColor">
+            #E6FFFFFF
+        </item>
+
+    </style>
+
+    <!--    邮票明细页面相关的 text appearance-->
+
+    <style name="mine_stamp_detail_tab_selected">
+
+        <item name="android:textSize">
+            16sp
+        </item>
+
+        <item name="android:textColor">
+            #5F75E4
+        </item>
+
+
+    </style>
+
+    <style name="mine_stamp_detail_tab_normal">
+
+        <item name="android:textSize">
+            14sp
+        </item>
+
+        <item name="android:textColor">
+            #CC15315B
+        </item>
+
+    </style>
+
+    <style name="mine_stamp_center_icon">
+
+        <item name="android:textSize">
+            18.78sp
+        </item>
+
+        <item name="android:textColor">
+            #E9F2FB
+        </item>
+
+    </style>
+
+    <style name="mine_stamp_center_tab_text">
+
+        <item name="android:textSize">
+            18sp
+        </item>
+
+        <item name="android:textColor">
+            #15315B
+        </item>
+
+    </style>
+
 </resources>
 
 

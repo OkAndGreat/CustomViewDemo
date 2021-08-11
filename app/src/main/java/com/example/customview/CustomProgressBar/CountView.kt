@@ -11,26 +11,28 @@ import com.example.customview.TextChangeView.Other.changed.TuvUtils
 import kotlin.math.abs
 import kotlin.math.ceil
 
+
 class CountView(context: Context) : View(context) {
-    companion object{
+    companion object {
         const val DEFAULT_TEXT_COLOR = "#7D8AFF"
         const val DEFAULT_TEXT_SIZE = 45f
         const val COUNT_ANIM_DURING = 5000
     }
 
-    private var mTextPaint:Paint
+    private var mTextPaint: Paint
     private var mTextSize = DEFAULT_TEXT_SIZE
     private var mTextColor = 0
     private var mEndTextColor = 0
 
     private var mCount = 0
     private var mMaxCount = 0
+
     //mTexts[0]是不变的部分，mTexts[1]原来的部分，mTexts[2]变化后的部分
     private var mTexts: Array<String?> = arrayOfNulls(3)
 
     //表示各部分的坐标
     private var mTextPoints
-            : Array<TuvPoint> = arrayOf(TuvPoint(), TuvPoint(),TuvPoint(),TuvPoint())
+            : Array<TuvPoint> = arrayOf(TuvPoint(), TuvPoint(), TuvPoint(), TuvPoint())
 
     private var mMaxOffsetY = 0f
     private var mMinOffsetY = 0f
@@ -41,12 +43,8 @@ class CountView(context: Context) : View(context) {
 
     private var mCarryNum = 0
 
-    private var mCount2Bigger = false
 
     init {
-        mTextSize = 24F
-        calculateChangeNum(0)
-
         mTextColor = Color.parseColor(DEFAULT_TEXT_COLOR)
 
         mMinOffsetY = 0f
@@ -61,9 +59,11 @@ class CountView(context: Context) : View(context) {
         mTextPaint.color = mTextColor
     }
 
-    fun setCount(mCount: Int) {
+    fun initCount(mCount: Int) {
         this.mCount = mCount
-        calculateChangeNum(0)
+        mTexts[0] = mCount.toString()
+        mTexts[1] = ""
+        mTexts[2] = ""
         requestLayout()
     }
 
@@ -146,13 +146,6 @@ class CountView(context: Context) : View(context) {
      * 这里是只针对加一和减一去计算的算法，因为直接设置的时候没有动画
      */
     fun calculateChangeNum(change: Int) {
-        if (change == 0) {
-            mTexts[0] = mCount.toString()
-            mTexts[1] = ""
-            mTexts[2] = ""
-            return
-        }
-
         val oldNum = mCount.toString()
         val newNum = (mCount + change).toString()
 
@@ -161,7 +154,7 @@ class CountView(context: Context) : View(context) {
         for (i in oldNum.indices) {
             val oldC = oldNum[i]
             val newC = newNum[i]
-            if (oldC != newC) {
+            if (oldC != newC || change == 0) {
                 mTexts[0] = if (i == 0) "" else newNum.substring(0, i)
                 mTexts[1] = oldNum.substring(i)
                 mTexts[2] = newNum.substring(i)
@@ -169,30 +162,25 @@ class CountView(context: Context) : View(context) {
             }
         }
         mCount += change
-        startAnim(change > 0)
+        if (change >= 0) {
+            startAnim(change!=0)
+        }
+
     }
 
-    private fun startAnim(is2Bigger: Boolean) {
-        mCount2Bigger = is2Bigger
+    private fun startAnim(needAnim: Boolean) {
         val textOffsetY = ObjectAnimator.ofFloat(
             this, "textOffsetY",
-            mMinOffsetY, if (mCount2Bigger) mMaxOffsetY else -mMaxOffsetY
+            mMinOffsetY, mMaxOffsetY
         )
         textOffsetY.duration = COUNT_ANIM_DURING.toLong()
-        textOffsetY.start()
+        if(needAnim) textOffsetY.start()
     }
 
     fun setTextOffsetY(offsetY: Float) {
         mOldOffsetY = offsetY //变大是从[0,1]，变小是[0,-1]
-        mNewOffsetY = if (mCount2Bigger)
-        {
-            //从下到上[-1,0]
-            offsetY - mMaxOffsetY
-        } else
-        {
-            //从上到下[1,0]
-            mMaxOffsetY + offsetY
-        }
+        mNewOffsetY = offsetY - mMaxOffsetY
+
         mFraction = (mMaxOffsetY - abs(mOldOffsetY)) / (mMaxOffsetY - mMinOffsetY)
         calculateLocation()
         postInvalidate()

@@ -3,20 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context=".CustomProgressBar.ProgressActivity">
-
 
 
     <com.example.customview.CustomProgressBar.ProgressLayout
 
-        android:id="@+id/progressLayout"
+        android:id="@+id/progressLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
 
+    <com.example.customview.CustomProgressBar.ProgressLayout
+
+        android:id="@+id/progressLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginTop="20dp" />
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
