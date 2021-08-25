@@ -11,7 +11,6 @@ class TestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
-        haha.calculateChangeNum(11000)
-
+        haha.calculateChangeNum(1234)
     }
 }

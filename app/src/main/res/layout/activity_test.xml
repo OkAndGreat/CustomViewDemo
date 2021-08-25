@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     android:orientation="vertical"
     tools:context=".test.TestActivity">
 
-    <com.example.customview.TextChangeView.CountView
+    <com.example.customview.TextChangeView.RollTextView.RollTextView
         android:id="@+id/haha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        app:cv_count="15"
-        app:cv_text_size="45sp" />
+        app:Roll_count="1000"
+        android:layout_centerInParent="true" />
 
 </RelativeLayout>

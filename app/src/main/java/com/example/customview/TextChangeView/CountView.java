@@ -21,9 +21,9 @@ import com.example.customview.TextChangeView.Other.changed.TuvUtils;
  * Author by OkAndGreat，Date on 2021/8/11.
  */
 public class CountView extends View{
-    public static final String DEFAULT_TEXT_COLOR = "#cccccc";
+    public static final String DEFAULT_TEXT_COLOR = "#ffffff";
     public static final float DEFAULT_TEXT_SIZE = 15f;
-    private static final int COUNT_ANIM_DURING = 2500;
+    private static final int COUNT_ANIM_DURING = 10000;
 
     private Paint mTextPaint;
     private float mTextSize;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="NumberInput">
         <item name="android:textSize">36dp</item>
@@ -437,6 +437,12 @@
 
     </style>
 
+    <!--确定唯一，不需要添加前缀-->
+    <declare-styleable name="RollTextView" tools:ignore="ResourceName">
+        <attr name="Roll_count" format="integer" />
+        <attr name="Roll_text_color" format="color"/>
+        <attr name="Roll_text_size" format="dimension"/>
+    </declare-styleable>
 </resources>
 
 

@@ -15,16 +15,17 @@
         <activity android:name=".customdialog.CustomDialogActivity">
         </activity>
         <activity android:name=".test.TestActivity">
-        </activity>
-        <activity android:name=".CustomProgressBar.ProgressActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CustomProgressBar.ProgressActivity" >
+        </activity>
         <activity android:name=".MotionLayout.UserActivity" />
         <activity android:name=".TextChangeView.mine.MyTextChangeActivity" >
+
         </activity>
         <activity android:name=".MotionLayout.Step1Activity" />
         <activity android:name=".MotionLayout.Step2Activity" />
